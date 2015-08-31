@@ -14,13 +14,13 @@ import com.sun.jna.ptr.PointerByReference;
 public class WindowsDetector {
     private static final int MAX_TITLE_LENGTH = 1024;
 
-    public static String getWindowTitle() throws Exception {
+    public static String getWindowTitle(){
         char[] buffer = new char[MAX_TITLE_LENGTH * 2];
         GetWindowTextW(GetForegroundWindow(), buffer, MAX_TITLE_LENGTH);
         return Native.toString(buffer);
     }
 
-    public static String getProcessName() throws Exception {
+    public static String getProcessName(){
         char[] buffer = new char[MAX_TITLE_LENGTH * 2];
         PointerByReference pointer = new PointerByReference();
         GetWindowThreadProcessId(GetForegroundWindow(), pointer);
@@ -29,12 +29,12 @@ public class WindowsDetector {
         return Native.toString(buffer);
     }
 
-    static class Psapi {
+    static class Psapi{
         static { Native.register("psapi"); }
         public static native int GetModuleBaseNameW(Pointer hProcess, Pointer hmodule, char[] lpBaseName, int size);
     }
 
-    static class Kernel32 {
+    static class Kernel32{
         static { Native.register("kernel32"); }
         public static int PROCESS_QUERY_INFORMATION = 0x0400;
         public static int PROCESS_VM_READ = 0x0010;

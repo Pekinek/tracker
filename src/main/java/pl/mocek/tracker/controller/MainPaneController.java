@@ -1,8 +1,6 @@
 package pl.mocek.tracker.controller;
 
-/**
- * Created by Michał on 2015-08-10.
- */
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -17,7 +15,7 @@ import java.util.ResourceBundle;
 public class MainPaneController implements Initializable{
     public static final String NAME_COLUMN = "Proces";
     public static final String DURATION_COLUMN = "Czas";
-    Tracker tracker;
+    private Tracker tracker;
 
     @FXML
     private TableView<Application> contentTable;
@@ -40,7 +38,7 @@ public class MainPaneController implements Initializable{
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         TableColumn<Application, String> durationColumn = new TableColumn<>(DURATION_COLUMN);
-        durationColumn.setCellValueFactory(new PropertyValueFactory<>("timeOn"));
+        durationColumn.setCellValueFactory(new PropertyValueFactory<>("timeOnString"));
 
         contentTable.getColumns().add(nameColumn);
         contentTable.getColumns().add(durationColumn);

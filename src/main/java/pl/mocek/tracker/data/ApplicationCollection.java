@@ -7,9 +7,7 @@ import javafx.collections.ObservableList;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-/**
- * Created by Michał on 2015-08-11.
- */
+
 public class ApplicationCollection implements Serializable {
     private static final long serialVersionUID = 421L;
     private ObservableList<Application> applicationList;
@@ -28,8 +26,9 @@ public class ApplicationCollection implements Serializable {
 
     public void checkAplication(Application application){
         int index = applicationList.indexOf(application);
-        if(index >=0) incrementTimer(index);
-        else applicationList.add(application);
+        if(index >=0) {
+            incrementTimer(index);
+        } else applicationList.add(application);
     }
 
 
@@ -39,16 +38,17 @@ public class ApplicationCollection implements Serializable {
         refreshTable(index, changedApplication);
     }
 
+
     private void refreshTable(int index, Application changedApplication){
-        if (Platform.isFxApplicationThread()) {
-            Platform.runLater(() -> {
+            try{
+                Platform.runLater(() -> {
+                    applicationList.set(index, null);
+                    applicationList.set(index, changedApplication);
+                });
+            } catch (IllegalStateException e) {
                 applicationList.set(index, null);
                 applicationList.set(index, changedApplication);
-            });
-        }
-        else{
-            applicationList.set(index, changedApplication);
-        }
+            }
     }
 
     public void clear(){
@@ -62,8 +62,9 @@ public class ApplicationCollection implements Serializable {
 
         ApplicationCollection that = (ApplicationCollection) o;
 
-        if (applicationList != null ? !applicationList.equals(that.applicationList) : that.applicationList != null)
+        if (applicationList != null ? !applicationList.equals(that.applicationList) : that.applicationList != null) {
             return false;
+        }
         if (localDate != null ? !localDate.equals(that.localDate) : that.localDate != null) return false;
 
         return true;
@@ -71,8 +72,8 @@ public class ApplicationCollection implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = applicationList != null ? applicationList.hashCode() : 0;
-        result = 31 * result + (localDate != null ? localDate.hashCode() : 0);
+        int result = (applicationList != null) ? applicationList.hashCode() : 0;
+        result = (31 * result) + ((localDate != null) ? localDate.hashCode() : 0);
         return result;
     }
 }

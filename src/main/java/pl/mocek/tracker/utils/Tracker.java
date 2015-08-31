@@ -7,7 +7,7 @@ import pl.mocek.tracker.data.ApplicationCollection;
  * Created by Michał on 2015-08-11.
  */
 public class Tracker implements Runnable{
-    ApplicationCollection applicationCollection;
+    private ApplicationCollection applicationCollection;
 
     public Tracker(){
         applicationCollection = new ApplicationCollection();
@@ -26,8 +26,6 @@ public class Tracker implements Runnable{
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                } catch (Exception E) {
-                    E.printStackTrace();
                 }
             }
         }
