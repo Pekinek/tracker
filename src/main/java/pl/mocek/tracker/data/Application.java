@@ -1,17 +1,14 @@
 package pl.mocek.tracker.data;
 
-import java.io.Serializable;
 import java.time.Duration;
 
-/**
- * Created by Michał on 2015-08-07.
- */
-public class Application implements Serializable {
-    private static final long serialVersionUID = 422L;
+
+public class Application {
     private String name;
     private Duration timeOn;
 
     public Application(String name){
+        name = name.toLowerCase();
         this.name = name.replaceAll(".exe", "");
         timeOn = Duration.ofSeconds(0);
     }
@@ -22,7 +19,7 @@ public class Application implements Serializable {
     }
 
     public String getName(){
-        return this.name;
+        return name;
     }
 
     public String getTimeOnString(){
@@ -35,13 +32,23 @@ public class Application implements Serializable {
 
     private String durationToString(Duration duration){
         StringBuilder sb = new StringBuilder();
+
+        if (duration.toHours() < 10) {
+            sb.append("0");
+        }
         sb.append(duration.toHours());
         sb.append(":");
-        if((duration.toMinutes() - duration.toHours()*60) < 10) sb.append("0");
-        sb.append((duration.toMinutes()) - duration.toHours()*60);
+
+        if ((duration.toMinutes() - (duration.toHours() * 60)) < 10) {
+            sb.append("0");
+        }
+        sb.append((duration.toMinutes()) - (duration.toHours() * 60));
         sb.append(":");
-        if(((duration.toMillis() / 1000) - (duration.toMinutes() * 60)) < 10) sb.append("0");
-        sb.append(duration.toMillis()/1000  - duration.toMinutes()*60);
+
+        if (((duration.toMillis() / 1000) - (duration.toMinutes() * 60)) < 10) {
+            sb.append("0");
+        }
+        sb.append((duration.toMillis() / 1000) - (duration.toMinutes() * 60));
         return sb.toString();
     }
 

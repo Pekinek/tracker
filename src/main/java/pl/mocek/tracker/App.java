@@ -8,26 +8,27 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 
 public class App extends Application {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void start(Stage primaryStage) {
-        final String appName = "Tracker v0.6";
+        final String appName = "Tracker v1.0";
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainPane.fxml"));
             primaryStage.getIcons().add(new Image("/images/icon.png"));
             primaryStage.setTitle(appName);
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-
 }
 

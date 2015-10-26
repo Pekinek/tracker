@@ -1,8 +1,6 @@
 package pl.mocek.tracker.utils;
 
-/**
- * Created by Michał on 2015-08-07.
- */
+
 public class OsUtils {
     private static String OS;
     public static String getOsName(){

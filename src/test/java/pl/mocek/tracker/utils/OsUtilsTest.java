@@ -1,9 +1,9 @@
 package pl.mocek.tracker.utils;
 
 import org.junit.Test;
-import pl.mocek.tracker.utils.OsUtils;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class OsUtilsTest {
 

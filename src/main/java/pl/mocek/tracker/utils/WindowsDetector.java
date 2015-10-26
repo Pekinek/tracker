@@ -1,13 +1,14 @@
 package pl.mocek.tracker.utils;
 
 
-import static pl.mocek.tracker.utils.WindowsDetector.Kernel32.*;
-import static pl.mocek.tracker.utils.WindowsDetector.Psapi.*;
-import static pl.mocek.tracker.utils.WindowsDetector.User32DLL.*;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.WinDef.HWND;
 import com.sun.jna.ptr.PointerByReference;
+
+import static pl.mocek.tracker.utils.WindowsDetector.Kernel32.*;
+import static pl.mocek.tracker.utils.WindowsDetector.Psapi.GetModuleBaseNameW;
+import static pl.mocek.tracker.utils.WindowsDetector.User32DLL.*;
 
 //Modified code from http://stackoverflow.com/questions/6391439/getting-active-window-information-in-java
 

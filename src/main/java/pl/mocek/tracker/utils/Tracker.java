@@ -1,34 +1,43 @@
 package pl.mocek.tracker.utils;
 
 import pl.mocek.tracker.data.Application;
-import pl.mocek.tracker.data.ApplicationCollection;
+import pl.mocek.tracker.data.CollectionCalendar;
 
-/**
- * Created by Michał on 2015-08-11.
- */
-public class Tracker implements Runnable{
-    private ApplicationCollection applicationCollection;
+import java.time.LocalDate;
 
-    public Tracker(){
-        applicationCollection = new ApplicationCollection();
+public class Tracker implements Runnable {
+    private int i;
+    private CollectionCalendar collectionCalendar;
+
+    public Tracker() {
+        collectionCalendar = new CollectionCalendar();
     }
 
-    public ApplicationCollection getApplicationCollection() {
-        return applicationCollection;
+    public CollectionCalendar getCollectionCalendar() {
+        return collectionCalendar;
     }
 
     @Override
     public void run() {
-        if(OsUtils.isWindows()) {
-            while(true){
+        if (OsUtils.isWindows()) {
+            while (true) {
                 try {
-                    applicationCollection.checkAplication(new Application(WindowsDetector.getProcessName()));
+                    collectionCalendar.get().checkAplication(new Application(WindowsDetector.getProcessName()));
+                    saveToFile();
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }
+    }
+
+    private void saveToFile() {
+        if (i == 30) {
+            FileManagement.saveFile(LocalDate.now(), collectionCalendar.get(LocalDate.now()));
+            i = 0;
+        }
+        i++;
     }
 
 
