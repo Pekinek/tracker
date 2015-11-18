@@ -19,7 +19,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        final String appName = "Tracker v1.0";
+        final String appName = "Tracker v1.1";
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainPane.fxml"));
             primaryStage.getIcons().add(new Image("/images/icon.png"));

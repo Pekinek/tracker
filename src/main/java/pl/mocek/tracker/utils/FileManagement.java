@@ -13,6 +13,7 @@ import java.time.LocalDate;
 public class FileManagement {
 
     public static void saveFile(LocalDate date, ApplicationCollection applicationCollection) {
+        createDir();
         try (
                 BufferedWriter writer = new BufferedWriter(new FileWriter("data/" + date + ".txt"))
         ) {
@@ -25,6 +26,10 @@ public class FileManagement {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void createDir() {
+        new File("data").mkdir();
     }
 
     public static ApplicationCollection loadFile(LocalDate date) {
